@@ -1,0 +1,14 @@
+{
+    "name": "andromeda/framework",
+    "description": "Leha",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Evgeniy Pavlov",
+            "email": "djoni-01@mail.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
