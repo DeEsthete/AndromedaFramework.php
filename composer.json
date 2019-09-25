@@ -10,5 +10,12 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "catfan/medoo": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "./app"
+        }
+    }
 }
