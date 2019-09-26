@@ -1,0 +1,13 @@
+<?php
+use classes\Vars;
+$newsTitle = Vars::get("newsTitle");
+$content = Vars::get("newsContent");
+?>
+
+<form action="/news/update" method="GET">
+    <span>Title</span><br>
+    <input name="title" type="text" value="<?=$newsTitle?>"><br>
+    <span>Content</span><br>
+    <input name="content" type="text" value="<?=$newsContent?>"><br>
+    <button type="submit">Send</button>
+</form>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ade3201f17d0d6cfb5ae655b6bc62fb4",
+    "content-hash": "b32e1baf40ec0497d38aefd541a8137a",
     "packages": [
         {
             "name": "catfan/medoo",
@@ -65,13 +65,70 @@
                 "sqlite"
             ],
             "time": "2019-08-14T13:47:48+00:00"
+        },
+        {
+            "name": "klein/klein",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/klein/klein.php.git",
+                "reference": "43d6725370929ba1c2cf1b0fbb94aab83b84f961"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/klein/klein.php/zipball/43d6725370929ba1c2cf1b0fbb94aab83b84f961",
+                "reference": "43d6725370929ba1c2cf1b0fbb94aab83b84f961",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/php-code-coverage": "^2.2",
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "1.4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Klein\\": "src/Klein/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris O'Hara",
+                    "email": "cohara87@gmail.com",
+                    "homepage": "http://chris6f.com/",
+                    "role": "Creator/Developer"
+                },
+                {
+                    "name": "Trevor Suarez",
+                    "email": "rican7@gmail.com",
+                    "homepage": "https://trevorsuarez.com/",
+                    "role": "Contributor/Developer"
+                }
+            ],
+            "description": "A lightning fast router for PHP",
+            "homepage": "https://github.com/klein/klein.php",
+            "keywords": [
+                "boilerplate",
+                "router",
+                "routing",
+                "sinatra"
+            ],
+            "time": "2017-02-02T03:08:40+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "catfan/medoo": 20
+        "catfan/medoo": 20,
+        "klein/klein": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

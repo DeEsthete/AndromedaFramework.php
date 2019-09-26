@@ -1,55 +1,80 @@
 <?php
-//use Doctrine\Common\Collections\ArrayCollection;
-//use Doctrine\Inflector\Inflector;
-//use Moontoast\Math\BigNumber;
 
+use classes\Page;
+use classes\Vars;
+use Klein\Klein;
 use Medoo\Medoo;
 
 include "vendor/autoload.php";
 
-//$collection = new ArrayCollection([1,2,3]);
-//$res = $collection->filter(function ($item){
-//    return $item == 2;
-//});
-//var_dump($res->toArray());
-
-//$numbers = [];
-////echo $number->pow("9999");
-//
-//function fib(BigNumber $index)
-//{
-//    if ($index->isLessThan(2)) {
-//        return $index;
-//    }
-//    $first = (new BigNumber($index))->subtract(2);
-//    $second = (new BigNumber($index))->subtract(1);
-//    $res = fib($first)->add(fib($second));
-//    return $res;
-//}
-//echo fib(new BigNumber('8'));
-
-$cfg = include "database.php";
-$db = new Medoo($cfg);
-//$db->insert("users", [
-//    "username" => "leha",
-//    "name" => "Alexey",
-//    "password" => "123"
-//]);
-
-//$db->update("users", [
-//    "username" => "NELEHA"
-//], [
-//    "id" => "2"
-//]);
-
-$db->delete("users", [
-    "id" => "2"
-]);
-
-$users = $db->select("users", "*");
-foreach ($users as $key => $user){
-    foreach ($user as $k => $item){
-        echo "$k => $item</br>";
+$router = new Klein();
+$router->respond("GET", "/news/?", function (){
+    $cfg = include "database.php";
+    $db = new Medoo($cfg);
+    $id = $_GET["id"];
+    if ($id === null){
+        $news = $db->select("news", "*");
+        Vars::set("news", $news);
     }
-}
-var_dump($users);
+    else{
+        $news = $db->select("news", "*", [
+            "id" => $id
+        ]);
+        Vars::set("news", $news);
+    }
+    $page = new Page("news.php");
+    Vars::set("title", "News");
+    Vars::set("content", $page->show());
+    include "app/views/_layout.php";
+});
+$router->respond("GET", "/news/create/?", function (){
+    $cfg = include "database.php";
+    $db = new Medoo($cfg);
+    $title = $_GET["title"];
+    $content = $_GET["content"];
+    if ($title === null || $content === null){
+        $page = new Page("newsCreate.html");
+        Vars::set("title", "Create news");
+        Vars::set("content", $page->show());
+        include "app/views/_layout.php";
+    }
+    else{
+        $db->insert("news", [
+            "title" => $title,
+            "content" => $content
+        ]);
+        header("Location: /news/");
+    }
+});
+
+$router->respond("GET", "/news/update/?", function (){
+    $cfg = include "database.php";
+    $db = new Medoo($cfg);
+    $id = $_GET["id"];
+    $title = $_GET["title"];
+    $content = $_GET["content"];
+    if ($id != null && $title != null || $content != null){
+        $db->update("news", [
+            "id" => $id,
+            "title" => $title,
+            "content" => $content
+        ]);
+    }
+    else if($id != null){
+        $page = new Page("newsUpdate.html");
+        $news = $db->select("news", "*", [
+            "id" => $id
+        ]);
+        var_dump($news);
+        $newsTitle = $news[0]["title"];
+        $newsContent = $news[0]["content"];
+        Vars::set("newsTitle", $newsTitle);
+        var_dump(Vars::get("newsContent"));
+        Vars::set("newsContent", $newsContent);
+        Vars::set("title", "Update news");
+        Vars::set("content", $page->show());
+        include "app/views/_layout.php";
+    }
+});
+
+$router->dispatch();

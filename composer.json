@@ -11,7 +11,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "catfan/medoo": "dev-master"
+        "catfan/medoo": "dev-master",
+        "klein/klein": "dev-master"
     },
     "autoload": {
         "psr-4": {
